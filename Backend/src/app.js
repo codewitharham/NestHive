@@ -1,7 +1,14 @@
 import express from "express"
 import Cors from 'cors'
 import cookieParser  from "cookie-parser"
-// import {CoinRouter} from "./routes/Coins.routes.js"
+
+import {UserRouter} from "./routes/User.routes"
+import {CollectionRouter} from "./routes/Collection.routes"
+
+import errorHandler from "./middleware/errors.middleware"
+
+
+
 
 const app = express()
 
@@ -14,6 +21,12 @@ app.use(cookieParser())
 
 
 /* ROUTES */ 
-// app.use("/api/v_1", CoinRouter)
+
+app.use("/api/auth", UserRouter);
+app.use("/api/collections", CollectionRouter);
+
+// Error Handling Middleware
+app.use(errorHandler);
+
 
 export {app}
