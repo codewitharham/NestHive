@@ -1,20 +1,40 @@
-import { Router } from "express";
-import { createCollection } from "../controllers/createCollection.js";
-import { getCollections, getCollectionById } from "../controllers/getCollection.js";
-import { deleteCollection } from "../controllers/deleteCollection.js";
-import { updateCollection } from "../controllers/updateCollection.js";
-import { authenticateUser } from "../middleware/auth.middleware.js";
+import mongoose from "mongoose";
 
-const CollectionRouter = Router();
+const collectionSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Collection name is required"],
+      trim: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // Reference to User model
+      required: true,
+    },
+    visibility: {
+      type: String,
+      enum: ["public", "private"],
+      default: "public",
+    },
+    items: [
+      {
+        name: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+    ],
+    tags: [{ type: String, trim: true }], // Tags for search & categorization
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
 
-// Define API endpoints
-CollectionRouter.route("/")
-  .post(authenticateUser, createCollection)   // Create a new collection (protected)
-  .get(getCollections);                       // Get all public collections
+// Prevent duplicate collection names for the same user
+collectionSchema.index({ name: 1, owner: 1 }, { unique: true });
 
-CollectionRouter.route("/:id")
-  .get(authenticateUser, getCollectionById)   // Get a single collection (protected for private ones)
-  .put(authenticateUser, updateCollection)    // Update an existing collection (only owner)
-  .delete(authenticateUser, deleteCollection); // Delete a collection (only owner)
+const Collection = mongoose.models.Collection || mongoose.model("Collection", collectionSchema);
 
-export { CollectionRouter };
+export default Collection;
