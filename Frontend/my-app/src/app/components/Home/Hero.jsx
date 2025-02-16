@@ -8,7 +8,7 @@ import { HoverBorderGradient } from "../ui/HoverBorderGradient";
 import Link from "next/link";
 
 const Hero = () => {
-  const word2 = ["Where Ideas Code", "Tech Thrives"];
+  const word2 = ["Where Developers Connect", "Empowering Open-Source"];
 
   return (
     <section className="relative flex flex-col items-center justify-center w-full min-h-screen bg-neutral-950 text-center antialiased">
@@ -22,11 +22,11 @@ const Hero = () => {
         {/* Title */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
           <TextGenerateEffect
-            words="Code"
+            words="Build"
             className="text-white font-extrabold uppercase tracking-tight leading-none text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
           />
           <TextGenerateEffect
-            words="Science"
+            words="Together"
             className="text-white font-extrabold uppercase tracking-wide leading-none text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
           />
         </div>
@@ -52,10 +52,10 @@ const Hero = () => {
             as="button"
             className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 px-6 py-3 text-lg font-semibold"
           >
-            <span>Get Started</span>
+            <span>Join the Community</span>
           </HoverBorderGradient>
-          <Link href="#" className="text-sm sm:text-base font-semibold text-white hover:underline">
-            Learn more <span aria-hidden="true">→</span>
+          <Link href="/ManageCollection" className="text-sm sm:text-base font-semibold text-white hover:underline">
+            Manage Collection <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
@@ -67,3 +67,4 @@ const Hero = () => {
 };
 
 export default Hero;
+    

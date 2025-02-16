@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Home/Hero.jsx", "src/app/components/ui/scroll-reveal.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Home/Hero.jsx", "src/app/components/ui/scroll-reveal.tsx", "src/app/components/LogoutButton/LogoutButton.jsx"],
   "exclude": ["node_modules"]
 }
